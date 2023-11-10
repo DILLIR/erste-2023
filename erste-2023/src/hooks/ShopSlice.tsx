@@ -8,7 +8,7 @@ export function useShop() {
   useEffect(() => {
     ApiInstance.get("providers")
       .then((data) => {
-        return data.data.data;
+        return data.data;
       })
       .then((data) => {
         setShops(data);
