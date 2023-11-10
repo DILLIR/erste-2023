@@ -1,8 +1,11 @@
 import { Stack, Typography } from "@mui/material";
 import ApiInstance from "./app/apiSlice";
+import { useEffect, useState } from "react";
+import Shop from "./components/shop";
+import { useShop } from "./hooks/ShopSlice";
 
 function App() {
-  ApiInstance.get("providers").then((data) => {console.log(data)});
+  const shops = useShop();
 
   return (
     <Stack
@@ -18,6 +21,11 @@ function App() {
       >
         Erste 2023 - win project
       </Typography>
+      <Stack direction={"column"} alignItems={"flex-start"} spacing={2}>
+        {shops?.map((shop) => {
+          return <Shop key={shop.id} id={shop.id} name={shop.title} />;
+        })}
+      </Stack>
     </Stack>
   );
 }
