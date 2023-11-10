@@ -1,16 +1,16 @@
-import { Outlet } from 'react-router-dom';
-import Header from './Header';
-import { Container } from '@mui/material';
-import Footer from './Footer';
+import { Container } from "@mui/material";
+import React from "react";
+import Footer from "./Footer";
+import Header from "./Header";
 
-const Layout = () => {
-    return (
-        <Container maxWidth='sm'>
-            <Header />
-            <Outlet />
-            <Footer />
-        </Container>
-    );
+const Layout = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <Container maxWidth="sm">
+      <Header />
+      {children}
+      <Footer />
+    </Container>
+  );
 };
 
 export default Layout;
