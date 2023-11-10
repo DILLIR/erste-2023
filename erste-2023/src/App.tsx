@@ -1,25 +1,19 @@
-import { Stack, Typography } from "@mui/material";
-import ApiInstance from "./app/apiSlice";
+import Layout from './components/Layout';
+import { Routes, Route } from 'react-router-dom';
+import HomePage from './pages/HomePage';
 
 function App() {
-  ApiInstance.get("providers").then((data) => {console.log(data)});
+    // ApiInstance.get('providers').then((data) => {
+    //     console.log(data);
+    // });
 
-  return (
-    <Stack
-      sx={{ minHeight: "100vh" }}
-      alignItems="center"
-      justifyContent="center"
-      direction="column"
-    >
-      <Typography
-        variant="h1"
-        textAlign="center"
-        sx={{ color: "rgb(40,112,237)" }}
-      >
-        Erste 2023 - win project
-      </Typography>
-    </Stack>
-  );
+    return (
+        <Routes>
+            <Route path='/' element={<Layout />}>
+                <Route index element={<HomePage />} />
+            </Route>
+        </Routes>
+    );
 }
 
 export default App;
