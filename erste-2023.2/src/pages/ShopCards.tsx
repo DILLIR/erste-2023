@@ -1,3 +1,5 @@
+import FullscreenIcon from "@mui/icons-material/Fullscreen";
+import { TabContext, TabList, TabPanel } from "@mui/lab";
 import {
   Box,
   Breadcrumbs,
@@ -9,16 +11,14 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import KauflandImg from "../assets/Card.png";
-import TeskoImg from "../assets/tesko.png";
-import LidlImg from "../assets/lidl.png";
-import BillaImg from "../assets/billa.png";
-import Layout from "../components/Layout";
 import React from "react";
-import { TabContext, TabList, TabPanel } from "@mui/lab";
-import FullscreenIcon from "@mui/icons-material/Fullscreen";
-import { useShop } from "../hooks/ShopSlice";
 import { useNavigate } from "react-router-dom";
+import KauflandImg from "../assets/Card.png";
+import LidlImg from "../assets/lidl.png";
+import TeskoImg from "../assets/tesko.png";
+import FreshImg from "../assets/fresh.png";
+import Layout from "../components/Layout";
+import { useShop } from "../hooks/ShopSlice";
 
 export function ShopCards() {
     const [value, setValue] = React.useState('1');
