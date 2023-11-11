@@ -2,7 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import { ShopCards } from './pages/ShopCards';
 import { BarcodeScanner } from './pages/scanner';
-import React from 'react';
+import TransactionsPage from './pages/TransactionsPage';
 
 export const router = createBrowserRouter([
     {
@@ -16,5 +16,9 @@ export const router = createBrowserRouter([
     {
         path: '/shop-cards',
         element: <ShopCards />,
+    },
+    {
+        path: '/transactions',
+        element: <TransactionsPage />,
     },
 ]);
