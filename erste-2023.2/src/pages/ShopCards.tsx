@@ -18,9 +18,24 @@ import React from "react";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import FullscreenIcon from "@mui/icons-material/Fullscreen";
 import { useShop } from "../hooks/ShopSlice";
+import { useNavigate } from "react-router-dom";
 
 export function ShopCards() {
   const [value, setValue] = React.useState("1");
+  const [cards, setCards] =
+    React.useState<Array<{ id: number; title: string }>>();
+
+  const navigator = useNavigate();
+
+  React.useEffect(() => {
+    fetch(
+      "https://ed-hackathon.nurxie.org/api/providers-available?card=1234567890123456"
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        setCards(data.result);
+      });
+  }, []);
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
@@ -40,9 +55,9 @@ export function ShopCards() {
   const handleFormSubmit = () => {
     fetch("https://ed-hackathon.nurxie.org/api/add-provider", {
       method: "PUT",
-      // headers: {
-      //   "Content-Type": "application/json",
-      // },
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify(form),
     }).then((response) => {
       if (response.ok) {
@@ -80,7 +95,7 @@ export function ShopCards() {
               </Typography>
             </Stack>
 
-            <ShopCardList />
+            <ShopCardList cards={cards} />
           </Stack>
         </Stack>
 
@@ -159,7 +174,7 @@ export function ShopCards() {
                     />
                     <Button
                       onClick={() => {
-                        handleFormSubmit()
+                        handleFormSubmit();
                       }}
                       sx={{
                         background: "#1D69EC",
@@ -179,6 +194,7 @@ export function ShopCards() {
                   fullWidth
                   startIcon={<FullscreenIcon />}
                   sx={{ background: "#FF6130", color: "#fff" }}
+                  onClick={() => {navigator("/scanner")}}
                 >
                   Naskenujte kartu
                 </Button>
@@ -197,31 +213,35 @@ export function ShopCards() {
   );
 }
 
-function ShopCardList() {
+type Card = {
+  id: number;
+  title: string;
+};
+
+function ShopCardList({ cards }: { cards?: Card[] }) {
   return (
     <Stack spacing="16px">
-      <ShopCard id={1} />
-      <ShopCard id={1} />
-      <ShopCard id={1} />
-      <ShopCard id={1} />
-      <ShopCard id={1} />
+      {cards != null &&
+        cards.map((card) => {
+          return <ShopCard key={card.id} id={card.id} name={card.title} />;
+        })}
     </Stack>
   );
 }
 
-function ShopCard({ id }: { id: number }) {
+function ShopCard({ id, name }: { id: number; name: string }) {
   return (
     <Stack direction={"row"} spacing="10px" alignItems={"center"}>
       <Box>
         {(function () {
-          if (id === 1) return <img src={KauflandImg} alt="" />;
-          if (id === 2) return <img src={TeskoImg} alt="" />;
-          if (id === 3) return <img src={FreshImg} alt="" />;
-          if (id === 4) return <img src={LidlImg} alt="" />;
+          if (id === 2) return <img src={KauflandImg} alt="" />;
+          if (id === 3) return <img src={TeskoImg} alt="" />;
+          if (id === 4) return <img src={FreshImg} alt="" />;
+          if (id === 1) return <img src={LidlImg} alt="" />;
         })()}
       </Box>
       <Stack>
-        <Typography>Kaufland Club Card</Typography>
+        <Typography>{name} Club Card</Typography>
         <Typography>#8712578125825728</Typography>
       </Stack>
     </Stack>
