@@ -1,7 +1,7 @@
-import { Stack, Typography } from "@mui/material";
-import { useShop } from "../hooks/ShopSlice";
-import Shop from "../components/shop";
+import { Stack } from "@mui/material";
 import { Loader } from "../components/loader";
+import Shop from "../components/shop";
+import { useShop } from "../hooks/ShopSlice";
 
 export function ShopList() {
   const shops = useShop();
