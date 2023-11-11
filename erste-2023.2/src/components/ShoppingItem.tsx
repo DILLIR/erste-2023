@@ -15,7 +15,13 @@ const ShoppingItem = ({ img, name, path }: ShoppingItemProps) => {
     };
 
     return (
-        <Stack direction='row' alignItems='center' gap={1} onClick={handleClick}>
+        <Stack
+            direction='row'
+            alignItems='center'
+            gap={1}
+            onClick={handleClick}
+            sx={{ cursor: 'pointer' }}
+        >
             {img}
             <Typography>{name}</Typography>
         </Stack>
