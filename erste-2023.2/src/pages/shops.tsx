@@ -2,6 +2,7 @@ import { Stack } from "@mui/material";
 import { Loader } from "../components/loader";
 import Shop from "../components/shop";
 import { useShop } from "../hooks/ShopSlice";
+import React from "react";
 
 export function ShopList() {
   const shops = useShop();

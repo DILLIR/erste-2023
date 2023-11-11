@@ -1,8 +1,8 @@
 import { createBrowserRouter } from 'react-router-dom';
-import { BarcodeScanner } from './pages/scanner';
-import { ShopList } from './pages/shops';
 import HomePage from './pages/HomePage';
 import { ShopCards } from './pages/ShopCards';
+import { BarcodeScanner } from './pages/scanner';
+import React from 'react';
 
 export const router = createBrowserRouter([
     {
