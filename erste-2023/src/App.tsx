@@ -1,19 +1,14 @@
-import Layout from './components/Layout';
-import { Routes, Route } from 'react-router-dom';
-import HomePage from './pages/HomePage';
+import React from "react";
+import { RouterProvider } from "react-router-dom";
+import { router } from "./router";
+import Layout from "./components/Layout";
 
 function App() {
-    // ApiInstance.get('providers').then((data) => {
-    //     console.log(data);
-    // });
-
-    return (
-        <Routes>
-            <Route path='/' element={<Layout />}>
-                <Route index element={<HomePage />} />
-            </Route>
-        </Routes>
-    );
+  return (
+    <React.StrictMode>
+        <RouterProvider router={router} ></RouterProvider>
+    </React.StrictMode>
+  );
 }
 
 export default App;
