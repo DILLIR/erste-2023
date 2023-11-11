@@ -1,6 +1,7 @@
 import { Breadcrumbs, Link, Stack, Typography } from '@mui/material';
 import Layout from '../components/Layout';
 import TransactionItem from '../components/TransactionItem';
+import React from 'react';
 
 const TransactionsPage = () => {
     return (

@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
-import React from "react";
 import "./loader.css";
+import React from 'react';
 
 export function Loader() {
   return (

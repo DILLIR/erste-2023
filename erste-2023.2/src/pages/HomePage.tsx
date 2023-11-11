@@ -1,6 +1,8 @@
 import { Typography, Stack, Box } from "@mui/material";
 import { EditIcon } from "../icons";
 import Layout from "../components/Layout";
+import React from 'react';
+import Section from '../assets/Section.png'
 
 const HomePage = () => {
   return (
@@ -44,7 +46,7 @@ const HomePage = () => {
             </Stack>
           </Stack>
           <Stack pt={4}>
-            <img src="/Section.png" alt="" />
+            <img src={Section} alt="" />
           </Stack>
         </Stack>
       </Box>

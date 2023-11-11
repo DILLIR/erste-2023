@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
+import React from 'react';
 import Stack from "@mui/material/Stack";
-import React from "react";
 
 export default function Shop({ name, id }: { name: string; id: number }) {
   return (

@@ -1,4 +1,5 @@
 import { Button, Stack } from '@mui/material';
+import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useZxing } from 'react-zxing';
@@ -59,7 +60,7 @@ export const BarcodeScanner = () => {
               <span>Rozložte svoju kartu na stranu, kde je čiarový kód. Umiestnite kartu tak, aby bola v ráme.</span>
             </p>
             <Button
-                onClick={() => { navigator(`/shop-cards:${result}`) }}
+                onClick={() => { navigator(`/shop-cards/${result}`) }}
                 disabled={result === '' ? true : false}
                 style={{
                     background: "var(--george-csas-cz-1425-x-714-default-fun-green, #FF6130)",

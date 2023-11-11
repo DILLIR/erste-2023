@@ -3,6 +3,7 @@ import { Container } from '@mui/material';
 import Footer from './Footer';
 import { useState } from 'react';
 import SideMenu from './SideMenu';
+import React from 'react';
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
     const [showSideMenu, setshowSideMenu] = useState(false);

@@ -1,12 +1,13 @@
 import { createBrowserRouter } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import { ShopCards } from './pages/ShopCards';
-import { BarcodeScanner } from './pages/scanner';
 import TransactionsPage from './pages/TransactionsPage';
+import { BarcodeScanner } from './pages/scanner';
+import React from 'react';
 
 export const router = createBrowserRouter([
     {
-        path: '/',
+        path: '/build/',
         element: <HomePage />,
     },
     {
@@ -15,6 +16,10 @@ export const router = createBrowserRouter([
     },
     {
         path: '/shop-cards',
+        element: <ShopCards />,
+    },
+    {
+        path: '/shop-cards/:cardNumber',
         element: <ShopCards />,
     },
     {

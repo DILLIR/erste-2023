@@ -1,4 +1,5 @@
 import { Box, Stack, Link } from '@mui/material';
+import React from 'react';
 
 const Footer = () => {
     return (

@@ -4,9 +4,12 @@ import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import MuiAccordionSummary, { AccordionSummaryProps } from '@mui/material/AccordionSummary';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
+import React from 'react';
 import { ArrowIcon } from '../icons';
 import ShoppingItem from './ShoppingItem';
-import React from 'react';
+import img1 from '../assets/nfc.svg'
+import img2 from '../assets/credit-card.svg'
+import img3 from '../assets/percent.svg'
 
 const Accordion = styled((props: AccordionProps) => (
     <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -44,6 +47,7 @@ export default function CustomizedAccordions() {
 
     const handleChange = (panel: string) => (event: React.SyntheticEvent, newExpanded: boolean) => {
         setExpanded(newExpanded ? panel : false);
+        console.log(event);
     };
 
     return (
@@ -83,7 +87,7 @@ export default function CustomizedAccordions() {
                         <ShoppingItem
                             img={
                                 <Stack bgcolor='#AED581' borderRadius={5} p={0.5}>
-                                    <img src='/nfc.svg' alt='Transakcie' />
+                                    <img src={img1} alt='Transakcie' />
                                 </Stack>
                             }
                             name='Transakcie'
@@ -92,7 +96,7 @@ export default function CustomizedAccordions() {
                         <ShoppingItem
                             img={
                                 <Stack bgcolor='#EF5350' borderRadius={5} p={0.5}>
-                                    <img src='/credit-card.svg' alt='karty' />
+                                    <img src={img2} alt='karty' />
                                 </Stack>
                             }
                             name='Obchodné kart'
@@ -101,7 +105,7 @@ export default function CustomizedAccordions() {
                         <ShoppingItem
                             img={
                                 <Stack bgcolor='#4A52C1' borderRadius={5} p={0.5}>
-                                    <img src='/percent.svg' alt='Cashback' />
+                                    <img src={img3} alt='Cashback' />
                                 </Stack>
                             }
                             name='Cashback'

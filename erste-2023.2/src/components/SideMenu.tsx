@@ -1,5 +1,6 @@
 import { Link, Drawer, Stack } from '@mui/material';
 import CustomizedAccordions from './CustomAccordion';
+import React from 'react';
 
 interface SideMenuProps {
     open: boolean;
