@@ -1,12 +1,12 @@
-import * as React from 'react';
-import { styled } from '@mui/material/styles';
-import ShoppingItem from './ShoppingItem';
-import MuiAccordion, { AccordionProps } from '@mui/material/Accordion';
-import MuiAccordionSummary, { AccordionSummaryProps } from '@mui/material/AccordionSummary';
-import MuiAccordionDetails from '@mui/material/AccordionDetails';
-import Typography from '@mui/material/Typography';
-import { ArrowIcon } from '../icons';
 import { Stack } from '@mui/material';
+import MuiAccordion, { AccordionProps } from '@mui/material/Accordion';
+import MuiAccordionDetails from '@mui/material/AccordionDetails';
+import MuiAccordionSummary, { AccordionSummaryProps } from '@mui/material/AccordionSummary';
+import Typography from '@mui/material/Typography';
+import { styled } from '@mui/material/styles';
+import { ArrowIcon } from '../icons';
+import ShoppingItem from './ShoppingItem';
+import React from 'react';
 
 const Accordion = styled((props: AccordionProps) => (
     <MuiAccordion disableGutters elevation={0} square {...props} />

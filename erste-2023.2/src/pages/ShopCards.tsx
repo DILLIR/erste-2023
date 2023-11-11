@@ -1,3 +1,5 @@
+import FullscreenIcon from '@mui/icons-material/Fullscreen';
+import { TabContext, TabList, TabPanel } from '@mui/lab';
 import {
     Alert,
     Box,
@@ -17,14 +19,14 @@ import FreshImg from '../assets/fresh.png';
 import LidlImg from '../assets/lidl.png';
 import Layout from '../components/Layout';
 import React from 'react';
-import { TabContext, TabList, TabPanel } from '@mui/lab';
-import FullscreenIcon from '@mui/icons-material/Fullscreen';
 import { useShop } from '../hooks/ShopSlice';
 import { useNavigate } from 'react-router-dom';
 
 export function ShopCards() {
     const [value, setValue] = React.useState('1');
-    const [cards, setCards] = React.useState<Array<{ id: number; title: string }>>();
+    const [cards, setCards] = React.useState<Card[]>();
+
+    const [refeatch, setRefeatch] = React.useState<boolean>(false);
     const [openSnackbar, setOpenSnackbar] = React.useState(false);
     const [snackbarType, setSnackbarType] = React.useState<'success' | 'error'>('success');
     const [snackBarMessage, setSnackBarMessage] = React.useState('');
@@ -32,12 +34,13 @@ export function ShopCards() {
     const navigator = useNavigate();
 
     React.useEffect(() => {
-        fetch('https://ed-hackathon.nurxie.org/api/providers-available?card=1234567890123456')
+        fetch('https://ed-hackathon.nurxie.org/api/providers-available?card=1234567890')
             .then((response) => response.json())
             .then((data) => {
                 setCards(data.result);
+                setRefeatch(false);
             });
-    }, []);
+    }, [refeatch]);
 
     const handleChange = (event: React.SyntheticEvent, newValue: string) => {
         setValue(newValue);
@@ -47,7 +50,8 @@ export function ShopCards() {
 
     const [form, setForm] = React.useState({
         provider_id: '',
-        card: '',
+        card: '1234567890',
+        provider_card_number: '',
     });
 
     const handleFormChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -137,7 +141,7 @@ export function ShopCards() {
                                 </TabList>
                             </Box>
 
-                            <TabPanel value='1'>
+                            <TabPanel value='1' sx={{ p: 0 }}>
                                 {' '}
                                 <form
                                     action='https://ed-hackathon.nurxie.org/api/add-provider'
@@ -178,8 +182,8 @@ export function ShopCards() {
                                         <TextField
                                             sx={{ mt: '6px' }}
                                             placeholder='Čislo karty'
-                                            name='card'
-                                            value={form.card}
+                                            name='provider_card_number'
+                                            value={form.provider_card_number}
                                             onChange={handleFormChange}
                                         />
                                         <Button
@@ -190,7 +194,8 @@ export function ShopCards() {
                                                 background: '#1D69EC',
                                                 color: '#fff',
                                                 borderRadius: '8px',
-                                                mt: '16px',
+                                                mt: '24px',
+                                                padding: '10px 8px',
                                             }}
                                         >
                                             Overiť
@@ -228,6 +233,7 @@ export function ShopCards() {
 type Card = {
     id: number;
     title: string;
+    number: string;
 };
 
 function ShopCardList({ cards }: { cards?: Card[] }) {
@@ -235,13 +241,20 @@ function ShopCardList({ cards }: { cards?: Card[] }) {
         <Stack spacing='16px'>
             {cards != null &&
                 cards.map((card) => {
-                    return <ShopCard key={card.id} id={card.id} name={card.title} />;
+                    return (
+                        <ShopCard
+                            key={card.id}
+                            id={card.id}
+                            name={card.title}
+                            number={card.number}
+                        />
+                    );
                 })}
         </Stack>
     );
 }
 
-function ShopCard({ id, name }: { id: number; name: string }) {
+function ShopCard({ id, name, number }: { id: number; name: string; number: string }) {
     return (
         <Stack direction={'row'} spacing='10px' alignItems={'center'}>
             <Box>
@@ -254,7 +267,7 @@ function ShopCard({ id, name }: { id: number; name: string }) {
             </Box>
             <Stack>
                 <Typography>{name} Club Card</Typography>
-                <Typography>#8712578125825728</Typography>
+                <Typography>{number}</Typography>
             </Stack>
         </Stack>
     );
