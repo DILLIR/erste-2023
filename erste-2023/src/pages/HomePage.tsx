@@ -3,7 +3,7 @@ import { EditIcon } from '../icons';
 
 const HomePage = () => {
     return (
-        <Box py={4} px={2}>
+        <Box py={4} px={2} pt={10}>
             <Stack>
                 <Typography color='#1D69EC' variant='h6' fontWeight={700} textAlign='center'>
                     Dobrý deň, Vladimir Bebra

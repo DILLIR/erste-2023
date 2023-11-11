@@ -1,15 +1,22 @@
 import { Outlet } from 'react-router-dom';
 import Header from './Header';
-import { Container } from '@mui/material';
+// import { Container } from '@mui/material';
 import Footer from './Footer';
+import { useState } from 'react';
+import SideMenu from './SideMenu';
 
 const Layout = () => {
+    const [showSideMenu, setshowSideMenu] = useState(false);
+
+    const toogleMenu = () => setshowSideMenu(!showSideMenu);
+
     return (
-        <Container maxWidth='sm'>
-            <Header />
+        <>
+            <Header isOpenMunu={showSideMenu} toogleMenu={toogleMenu} />
             <Outlet />
+            <SideMenu open={showSideMenu} />
             <Footer />
-        </Container>
+        </>
     );
 };
 

@@ -9,11 +9,17 @@ const Footer = () => {
             alignItems='flex-end'
             p={2}
         >
-            <img src='Union.svg' alt='' style={{ width: '100px' }} />
+            <img src='Union.svg' alt='' style={{ width: '80px' }} />
             <Stack direction='row' gap={1}>
-                <Link sx={{ color: '#fff' }}>Kontakty</Link>
-                <Link sx={{ color: '#fff' }}>Zásady ochrany dát</Link>
-                <Link sx={{ color: '#fff' }}>Podmienky</Link>
+                <Link sx={{ color: '#fff' }} fontSize='12px'>
+                    Kontakty
+                </Link>
+                <Link sx={{ color: '#fff' }} fontSize='12px'>
+                    Zásady ochrany dát
+                </Link>
+                <Link sx={{ color: '#fff' }} fontSize='12px'>
+                    Podmienky
+                </Link>
             </Stack>
         </Box>
     );
