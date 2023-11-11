@@ -5,7 +5,7 @@ import Layout from "../components/Layout";
 const HomePage = () => {
   return (
     <Layout>
-      <Box py={4} px={2}>
+      <Box py={4} px={2} pt={10}>
         <Stack>
           <Typography
             color="#1D69EC"

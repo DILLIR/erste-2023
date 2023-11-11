@@ -2,18 +2,28 @@ import { AppBar, Typography, IconButton, Stack } from '@mui/material';
 import { MenuIcon, LogoIcon, TurnIcon } from '../icons';
 import { Link } from 'react-router-dom';
 
-const Header = () => {
+interface HeaderProps {
+    readonly toogleMenu: () => void;
+    readonly isOpenMunu: boolean;
+}
+
+const Header = ({ toogleMenu, isOpenMunu }: HeaderProps) => {
     return (
-        <AppBar position='static' sx={{ background: '#135EE2' }} enableColorOnDark>
-            <Stack
-                direction='row'
-                alignItems='center'
-                justifyContent='space-between'
-                px={3}
-                pr={4}
-                py={2}
-            >
-                <Stack direction='row' alignItems='center'>
+        <AppBar
+            position='fixed'
+            sx={{ background: '#135EE2', zIndex: 10, px: 2, py: 1 }}
+            enableColorOnDark
+        >
+            <Stack direction='row' alignItems='center' justifyContent='space-between'>
+                <Stack
+                    direction='row'
+                    alignItems='center'
+                    p={0.1}
+                    pr={2}
+                    borderRadius={1}
+                    bgcolor={isOpenMunu ? 'rgba(0, 0, 0, 0.3)' : ''}
+                    onClick={toogleMenu}
+                >
                     <IconButton>
                         <MenuIcon />
                     </IconButton>
