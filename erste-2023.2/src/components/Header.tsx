@@ -21,6 +21,7 @@ const Header = ({ toogleMenu, isOpenMunu }: HeaderProps) => {
                     p={0.1}
                     pr={2}
                     borderRadius={1}
+                    sx={{ cursor: 'pointer' }}
                     bgcolor={isOpenMunu ? 'rgba(0, 0, 0, 0.3)' : ''}
                     onClick={toogleMenu}
                 >
