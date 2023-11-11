@@ -6,18 +6,18 @@ const Footer = () => {
             sx={{ background: '#2870ED' }}
             display='flex'
             justifyContent='space-between'
-            alignItems='flex-end'
+            alignItems='center'
             p={2}
         >
-            <img src='Union.svg' alt='' style={{ width: '80px' }} />
-            <Stack direction='row' gap={1}>
-                <Link sx={{ color: '#fff' }} fontSize='12px'>
+            <img src='footer_logo.svg' alt='' style={{ width: '150px' }} />
+            <Stack direction='row' gap={2}>
+                <Link sx={{ color: '#fff' }} fontSize='16px'>
                     Kontakty
                 </Link>
-                <Link sx={{ color: '#fff' }} fontSize='12px'>
+                <Link sx={{ color: '#fff' }} fontSize='16px'>
                     Zásady ochrany dát
                 </Link>
-                <Link sx={{ color: '#fff' }} fontSize='12px'>
+                <Link sx={{ color: '#fff' }} fontSize='16px'>
                     Podmienky
                 </Link>
             </Stack>

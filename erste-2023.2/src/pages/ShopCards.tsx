@@ -1,9 +1,11 @@
 import {
+    Alert,
     Box,
     Breadcrumbs,
     Button,
     Link,
     MenuItem,
+    Snackbar,
     Stack,
     Tab,
     TextField,
@@ -23,6 +25,9 @@ import { useNavigate } from 'react-router-dom';
 export function ShopCards() {
     const [value, setValue] = React.useState('1');
     const [cards, setCards] = React.useState<Array<{ id: number; title: string }>>();
+    const [openSnackbar, setOpenSnackbar] = React.useState(false);
+    const [snackbarType, setSnackbarType] = React.useState<'success' | 'error'>('success');
+    const [snackBarMessage, setSnackBarMessage] = React.useState('');
 
     const navigator = useNavigate();
 
@@ -58,15 +63,26 @@ export function ShopCards() {
             body: JSON.stringify(form),
         }).then((response) => {
             if (response.ok) {
-                alert('Karta bola úspešne pridaná');
+                setOpenSnackbar(true);
+                setSnackbarType('success');
+                setSnackBarMessage('Karta bola úspešne pridaná');
             } else {
-                alert('Karta nebola pridaná');
+                setOpenSnackbar(true);
+                setSnackbarType('error');
+                setSnackBarMessage('Karta nebola pridaná');
             }
         });
     };
 
+    const handleClose = () => {
+        setOpenSnackbar(false);
+    };
+
     return (
         <Layout>
+            <Snackbar autoHideDuration={2000} open={openSnackbar} onClose={handleClose}>
+                <Alert severity={snackbarType}>{snackBarMessage}</Alert>
+            </Snackbar>
             <Stack sx={{ px: '14px', pb: '8px', pt: '70px', background: '#fff' }} spacing='24px'>
                 <Breadcrumbs aria-label='breadcrumb' sx={{ py: '10px' }}>
                     <Link underline='hover' color='inherit' href='/'>

@@ -3,6 +3,7 @@ import { BarcodeScanner } from './pages/scanner';
 import { ShopList } from './pages/shops';
 import HomePage from './pages/HomePage';
 import { ShopCards } from './pages/ShopCards';
+import TransactionsPage from './pages/TransactionsPage';
 
 export const router = createBrowserRouter([
     {
@@ -16,5 +17,9 @@ export const router = createBrowserRouter([
     {
         path: '/shop-cards',
         element: <ShopCards />,
+    },
+    {
+        path: '/transactions',
+        element: <TransactionsPage />,
     },
 ]);
