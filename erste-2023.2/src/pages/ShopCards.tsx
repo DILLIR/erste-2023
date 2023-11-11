@@ -21,35 +21,40 @@ import Layout from "../components/Layout";
 import { useShop } from "../hooks/ShopSlice";
 
 export function ShopCards() {
-    const [value, setValue] = React.useState('1');
-    const [cards, setCards] = React.useState<Array<{ id: number; title: string }>>();
+  const [value, setValue] = React.useState("1");
+  const [cards, setCards] =
+    React.useState<Card[]>();
+
+  const [refeatch, setRefeatch] = React.useState<boolean>(false);
 
   const navigator = useNavigate();
 
   React.useEffect(() => {
     fetch(
-      "https://ed-hackathon.nurxie.org/api/providers-available?card=1234567890123456"
+      "https://ed-hackathon.nurxie.org/api/providers-available?card=1234567890"
     )
       .then((response) => response.json())
       .then((data) => {
         setCards(data.result);
+        setRefeatch(false);
       });
-  }, []);
+  }, [refeatch]);
 
-    const handleChange = (event: React.SyntheticEvent, newValue: string) => {
-        setValue(newValue);
-    };
+  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+    setValue(newValue);
+  };
 
-    const shops = useShop();
+  const shops = useShop();
 
   const [form, setForm] = React.useState({
     provider_id: "",
-    card: "",
+    card: "1234567890",
+    provider_card_number: "",
   });
 
-    const handleFormChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setForm({ ...form, [event.target.name]: event.target.value });
-    };
+  const handleFormChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setForm({ ...form, [event.target.name]: event.target.value });
+  };
 
   const handleFormSubmit = () => {
     fetch("https://ed-hackathon.nurxie.org/api/add-provider", {
@@ -60,70 +65,74 @@ export function ShopCards() {
       body: JSON.stringify(form),
     }).then((response) => {
       if (response.ok) {
-        alert("Karta bola úspešne pridaná");
-      } else {
-        alert("Karta nebola pridaná");
+        setRefeatch(true);
       }
     });
   };
 
-    return (
-        <Layout>
-            <Stack sx={{ px: '14px', pb: '8px', pt: '70px', background: '#fff' }} spacing='24px'>
-                <Breadcrumbs aria-label='breadcrumb' sx={{ py: '10px' }}>
-                    <Link underline='hover' color='inherit' href='/'>
-                        Prehľad
-                    </Link>
-                    <Typography color='text.primary'>Obchodné karty </Typography>
-                </Breadcrumbs>
-                <Stack
-                    sx={{
-                        p: '16px',
-                        boxShadow: ' 0px 2px 4px 0px rgba(10, 40, 92, 0.05)',
-                        borderRadius: '8px',
-                    }}
+  return (
+    <Layout>
+      <Stack
+        sx={{ px: "14px", pb: "8px", pt: "70px", background: "#fff" }}
+        spacing="24px"
+      >
+        <Breadcrumbs aria-label="breadcrumb" sx={{ py: "10px" }}>
+          <Link underline="hover" color="inherit" href="/">
+            Prehľad
+          </Link>
+          <Typography color="text.primary">Obchodné karty </Typography>
+        </Breadcrumbs>
+        <Stack
+          sx={{
+            p: "16px",
+            boxShadow: " 0px 2px 4px 0px rgba(10, 40, 92, 0.05)",
+            borderRadius: "8px",
+          }}
+        >
+          <Stack spacing="24px">
+            <Stack spacing="12px">
+              <Typography fontSize={28} fontWeight={500}>
+                Vaše karty
+              </Typography>
+              <Typography fontSize="16px" sx={{ color: "#567394" }}>
+                Tu sú zľavové, bonusové a sporiace karty, ktoré ste predtým
+                prepojili so svojím Erste Digital účtom.
+              </Typography>
+            </Stack>
+
+            <ShopCardList cards={cards} />
+          </Stack>
+        </Stack>
+
+        <Stack
+          sx={{
+            p: "16px",
+            boxShadow: " 0px 2px 4px 0px rgba(10, 40, 92, 0.05)",
+            borderRadius: "8px",
+          }}
+        >
+          <Stack spacing="24px">
+            <Stack spacing="12px">
+              <Typography fontSize={28} fontWeight={500}>
+                Pridať novú kartu
+              </Typography>
+              <Typography fontSize="16px" sx={{ color: "#567394" }}>
+                Pridajte kartu naskenovaním alebo ručným zadaním.
+              </Typography>
+            </Stack>
+
+            <TabContext value={value}>
+              <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+                <TabList
+                  onChange={handleChange}
+                  aria-label="lab API tabs example"
                 >
-                    <Stack spacing='24px'>
-                        <Stack spacing='12px'>
-                            <Typography fontSize={28} fontWeight={500}>
-                                Vaše karty
-                            </Typography>
-                            <Typography fontSize='16px' sx={{ color: '#567394' }}>
-                                Tu sú zľavové, bonusové a sporiace karty, ktoré ste predtým
-                                prepojili so svojím Erste Digital účtom.
-                            </Typography>
-                        </Stack>
+                  <Tab label="Manuálne" value="1" />
+                  <Tab label="Automaticky" value="2" />
+                </TabList>
+              </Box>
 
-                        <ShopCardList cards={cards} />
-                    </Stack>
-                </Stack>
-
-                <Stack
-                    sx={{
-                        p: '16px',
-                        boxShadow: ' 0px 2px 4px 0px rgba(10, 40, 92, 0.05)',
-                        borderRadius: '8px',
-                    }}
-                >
-                    <Stack spacing='24px'>
-                        <Stack spacing='12px'>
-                            <Typography fontSize={28} fontWeight={500}>
-                                Pridať novú kartu
-                            </Typography>
-                            <Typography fontSize='16px' sx={{ color: '#567394' }}>
-                                Pridajte kartu naskenovaním alebo ručným zadaním.
-                            </Typography>
-                        </Stack>
-
-                        <TabContext value={value}>
-                            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                                <TabList onChange={handleChange} aria-label='lab API tabs example'>
-                                    <Tab label='Manuálne' value='1' />
-                                    <Tab label='Automaticky' value='2' />
-                                </TabList>
-                            </Box>
-
-              <TabPanel value="1">
+              <TabPanel value="1" sx={{ p: 0 }}>
                 {" "}
                 <form
                   action="https://ed-hackathon.nurxie.org/api/add-provider"
@@ -164,8 +173,8 @@ export function ShopCards() {
                     <TextField
                       sx={{ mt: "6px" }}
                       placeholder="Čislo karty"
-                      name="card"
-                      value={form.card}
+                      name="provider_card_number"
+                      value={form.provider_card_number}
                       onChange={handleFormChange}
                     />
                     <Button
@@ -176,7 +185,8 @@ export function ShopCards() {
                         background: "#1D69EC",
                         color: "#fff",
                         borderRadius: "8px",
-                        mt: "16px",
+                        mt: "24px",
+                        padding: "10px 8px",
                       }}
                     >
                       Overiť
@@ -190,7 +200,9 @@ export function ShopCards() {
                   fullWidth
                   startIcon={<FullscreenIcon />}
                   sx={{ background: "#FF6130", color: "#fff" }}
-                  onClick={() => {navigator("/scanner")}}
+                  onClick={() => {
+                    navigator("/scanner");
+                  }}
                 >
                   Naskenujte kartu
                 </Button>
@@ -210,22 +222,23 @@ export function ShopCards() {
 }
 
 type Card = {
-    id: number;
-    title: string;
+  id: number;
+  title: string;
+  number: string;
 };
 
 function ShopCardList({ cards }: { cards?: Card[] }) {
-    return (
-        <Stack spacing='16px'>
-            {cards != null &&
-                cards.map((card) => {
-                    return <ShopCard key={card.id} id={card.id} name={card.title} />;
-                })}
-        </Stack>
-    );
+  return (
+    <Stack spacing="16px">
+      {cards != null &&
+        cards.map((card) => {
+          return <ShopCard key={card.id} id={card.id} name={card.title} number={card.number}/>;
+        })}
+    </Stack>
+  );
 }
 
-function ShopCard({ id, name }: { id: number; name: string }) {
+function ShopCard({ id, name, number }: { id: number; name: string; number: string }) {
   return (
     <Stack direction={"row"} spacing="10px" alignItems={"center"}>
       <Box>
@@ -238,7 +251,7 @@ function ShopCard({ id, name }: { id: number; name: string }) {
       </Box>
       <Stack>
         <Typography>{name} Club Card</Typography>
-        <Typography>#8712578125825728</Typography>
+        <Typography>{number}</Typography>
       </Stack>
     </Stack>
   );
